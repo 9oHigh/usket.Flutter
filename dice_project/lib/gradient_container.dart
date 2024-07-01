@@ -6,6 +6,14 @@ import 'package:dice_project/styled_text.dart';
 var startAlignment = Alignment.topLeft;
 var endAlignment = Alignment.bottomRight;
 
+// 값이 변하지 않는다면 final을 사용해서 최적화
+// 동일하게 const를 사용할 수 있다. 
+// 다만, final의 경우, 런타임에 정해지는 상수라면 사용하고
+// const의 경우, 컴파일 타임 즉, 실행이전에 정해진 상수일 경우 사용해야한다.
+// 성능 최적화 ( 내부 )
+const newAlignment = Alignment.bottomRight;
+
+
 // 타입을 옵셔널하게 선언한 이후, 값을 넣어 사용할 수 있음
 Alignment? myAlignment;
 
