@@ -1,5 +1,7 @@
+import 'package:dice_project/dice_roller.dart';
 import 'package:flutter/material.dart';
 import 'package:dice_project/styled_text.dart';
+import 'package:dice_project/dice_roller.dart';
 
 // var는 선언이후에 다른 곳에서 사용할 때, 값이 변경된다면
 // 지정된 타입이 아닌 Dynamic 타입으로, 런타임시에 타입이 결정된다.
@@ -18,20 +20,28 @@ Alignment? myAlignment;
 
 class GradientContainer extends StatelessWidget {
 
-  const GradientContainer(this.colors, {super.key});
-  final List<Color> colors;
+  const GradientContainer(this.color1, this.color2, {super.key});
+  const GradientContainer.purple({super.key})
+      : color1 = Colors.deepPurple,
+        color2 = Colors.indigo;
+
+  final Color color1;
+  final Color color2;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: colors,
+          colors: [color1, color2],
           begin: startAlignment,
           end: endAlignment,
         ),
       ),
-      child: const Center(child: StyledText('Hello, world!')),
+      child: const Center(
+        child: 
+        DiceRoller(),
+      ),
     );
   }
 }
