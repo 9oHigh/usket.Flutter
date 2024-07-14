@@ -1,6 +1,7 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
+
+final randomizer = Random();
 
 class DiceRoller extends StatefulWidget {
   const DiceRoller({super.key});
@@ -14,13 +15,12 @@ class DiceRoller extends StatefulWidget {
 
 // Private의 역할을 하는 _(언더바)
 class _DiceRollerState extends State<DiceRoller> {
-  var activeDiceImage = 'assets/images/dice-2.png';
-  var number = 1;
+
+  var currentDiceRoll = 1;
 
   void rollDice() {
-    number = Random().nextInt(5) + 1;
     setState(() {
-      activeDiceImage = 'assets/images/dice-$number.png';
+      currentDiceRoll = randomizer.nextInt(6) + 1;
     });
   }
 
@@ -36,7 +36,7 @@ class _DiceRollerState extends State<DiceRoller> {
           },
         ),
         Image.asset(
-          activeDiceImage,
+          'assets/images/dice-$currentDiceRoll.png',
           width: 200,
         ),
         const SizedBox(
