@@ -1,7 +1,5 @@
 import 'package:dice_project/dice_roller.dart';
 import 'package:flutter/material.dart';
-import 'package:dice_project/styled_text.dart';
-import 'package:dice_project/dice_roller.dart';
 
 // var는 선언이후에 다른 곳에서 사용할 때, 값이 변경된다면
 // 지정된 타입이 아닌 Dynamic 타입으로, 런타임시에 타입이 결정된다.
