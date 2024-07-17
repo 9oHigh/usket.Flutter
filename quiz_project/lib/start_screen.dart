@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+
+  const StartScreen(this.startQuiz, {super.key});
+  final void Function() startQuiz;
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +14,8 @@ class StartScreen extends StatelessWidget {
           Image.asset(
             'assets/images/quiz-logo.png',
             width: 300,
+            // Opacity를 Widget으로 사용하기 보다는 ARGB에서 값을 조정해서 사용하는 방식을 추천
+            color: const Color.fromARGB(150, 255, 255, 255),
           ),
           const SizedBox(
             height: 80,
@@ -26,17 +30,20 @@ class StartScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          OutlinedButton(
+          OutlinedButton.icon(
+            onPressed: startQuiz,
             style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.white
+              foregroundColor: Colors.white,
             ),
-            onPressed: () {},
-            child: const Text("Start Quiz"),
+            icon: const Icon(
+              Icons.arrow_right_alt,
+            ),
+            label: const Text(
+              "Start Quiz",
+            ),
           ),
         ],
       ),
     );
   }
-
-  void onPressed() {}
 }
