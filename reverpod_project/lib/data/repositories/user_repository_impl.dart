@@ -4,6 +4,7 @@ import 'package:reverpod_project/domain/repositories/user_repository.dart';
 import 'package:http/http.dart' as http;
 import '../dto/user_dto.dart';
 
+// Domain Layer의 UseCase에 있는 UserRepository(추상 클래스)를 상속
 class UserRepositoryImpl extends UserRepository {
   final http.Client client;
 

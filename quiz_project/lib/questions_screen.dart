@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_project/answer_button.dart';
 import 'package:quiz_project/data/questions.dart';
 
 class QuestionsScreen extends StatefulWidget {
+  const QuestionsScreen({super.key, required this.onSelectAnswer});
 
-  const QuestionsScreen({super.key});
+  final void Function(String answer) onSelectAnswer;
 
   @override
   State<StatefulWidget> createState() {
@@ -13,12 +15,15 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsState extends State<QuestionsScreen> {
-
   var currentQuestionIndex = 0;
 
-  void answerQuestion() {
+  void answerQuestion(String selectedAnswer) {
+    widget.onSelectAnswer(selectedAnswer);
+
     setState(() {
-      currentQuestionIndex++;
+      if (currentQuestionIndex < 5) {
+        currentQuestionIndex++;
+      }
     });
   }
 
@@ -35,9 +40,10 @@ class _QuestionsState extends State<QuestionsScreen> {
           children: [
             Text(
               currentQuestion.text,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
+              style: GoogleFonts.lato(
+                color: const Color.fromARGB(255, 201, 153, 251),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
@@ -46,7 +52,12 @@ class _QuestionsState extends State<QuestionsScreen> {
             ),
             // ...를 통해서 스프레딩 가능 / 뿌리기!
             ...currentQuestion.getShuffledAnswers().map((answer) {
-              return AnswerButton(answer: answer, onTapped: answerQuestion,);
+              return AnswerButton(
+                answer: answer,
+                onTapped: () {
+                  answerQuestion(answer);
+                },
+              );
             })
           ],
         ),

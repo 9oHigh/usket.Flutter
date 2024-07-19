@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_project/Results_screen.dart';
+import 'package:quiz_project/data/questions.dart';
 import 'package:quiz_project/start_screen.dart';
 import 'package:quiz_project/questions_screen.dart';
 
@@ -11,7 +13,9 @@ class Quiz extends StatefulWidget {
   }
 }
 
+// _는 Private를 의미, 같은 파일에서만 접근 가능 ( class )
 class _QuizState extends State<Quiz> {
+  List<String> selectedAnswers = [];
   var activeScreen = 'start-screen';
 
   void switchScreen() {
@@ -20,14 +24,40 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void chooseAnswer(String answer) {
+    // add는 메모리를 참조해 추가하는 방식
+    selectedAnswers.add(answer);
+
+    if (selectedAnswers.length == questions.length) {
+      setState(() {
+        activeScreen = 'result-screen';
+      });
+    }
+  }
+
+  void restart() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 'questions-screen';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    
     Widget screenWidget = StartScreen(switchScreen);
 
     if (activeScreen == 'questions-screen') {
-      screenWidget = const QuestionsScreen();
-    }         
+      screenWidget = QuestionsScreen(
+        onSelectAnswer: chooseAnswer,
+      );
+    }
+
+    if (activeScreen == 'result-screen') {
+      screenWidget = ResultsScreen(
+        chosenAnswers: selectedAnswers,
+        restart: restart,
+      );
+    }
 
     return MaterialApp(
       home: Scaffold(
